@@ -1,0 +1,129 @@
+.reviews-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.reviews-header {
+  text-align: center;
+}
+
+.reviews-header h2 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-2);
+}
+
+.reviews-header p {
+  font-size: var(--font-size-lg);
+  color: var(--gray-600);
+  margin: 0;
+}
+
+.reviews-summary {
+  background-color: var(--white);
+  padding: var(--spacing-8);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-md);
+}
+
+.rating-overview {
+  text-align: center;
+}
+
+.rating-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-3);
+}
+
+.star-icon {
+  font-size: 3rem;
+  color: var(--accent-orange);
+}
+
+.rating-number {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-black);
+  color: var(--gray-900);
+}
+
+.rating-text {
+  font-size: var(--font-size-lg);
+  color: var(--gray-600);
+  margin-bottom: var(--spacing-2);
+}
+
+.reviews-count {
+  font-size: var(--font-size-base);
+  color: var(--gray-500);
+  margin: 0;
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.review-card {
+  background-color: var(--white);
+  padding: var(--spacing-6);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+}
+
+.review-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-4);
+}
+
+.review-header h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-1);
+}
+
+.review-van {
+  font-size: var(--font-size-sm);
+  color: var(--gray-500);
+  margin: 0;
+}
+
+.review-rating {
+  display: flex;
+  gap: var(--spacing-1);
+}
+
+.star {
+  color: var(--gray-300);
+  font-size: 1rem;
+}
+
+.star.filled {
+  color: var(--accent-orange);
+}
+
+.review-comment {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--gray-700);
+  margin-bottom: var(--spacing-3);
+}
+
+.review-date {
+  font-size: var(--font-size-sm);
+  color: var(--gray-500);
+  margin: 0;
+}

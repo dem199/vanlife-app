@@ -1,0 +1,101 @@
+.host-vans-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.host-vans-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+}
+
+.host-vans-header h2 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--gray-900);
+  margin: 0;
+}
+
+.host-vans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-6);
+}
+
+.host-van-card {
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+.host-van-card:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+.host-van-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.host-van-info {
+  padding: var(--spacing-5);
+}
+
+.host-van-info h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-2);
+}
+
+.van-price {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary-600);
+  margin-bottom: var(--spacing-3);
+}
+
+.van-stats {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--gray-600);
+  text-transform: capitalize;
+}
+
+.empty-vans-state {
+  text-align: center;
+  padding: var(--spacing-16) var(--spacing-6);
+  background-color: var(--white);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-md);
+}
+
+.empty-vans-state p {
+  font-size: var(--font-size-lg);
+  color: var(--gray-600);
+  margin-bottom: var(--spacing-6);
+}
+
+@media (max-width: 640px) {
+  .host-vans-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .host-vans-header button {
+    width: 100%;
+  }
+
+  .host-vans-grid {
+    grid-template-columns: 1fr;
+  }
+}

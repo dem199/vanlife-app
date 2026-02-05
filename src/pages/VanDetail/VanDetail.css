@@ -1,0 +1,265 @@
+.van-detail-page {
+  padding: var(--spacing-8) 0 var(--spacing-12);
+  min-height: 80vh;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--gray-700);
+  text-decoration: none;
+  margin-bottom: var(--spacing-8);
+  padding: var(--spacing-2) 0;
+  transition: color var(--transition-base);
+}
+
+.back-link:hover {
+  color: var(--primary-600);
+}
+
+.back-link:hover span {
+  text-decoration: underline;
+}
+
+.van-detail-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-10);
+}
+
+/* Images */
+.van-detail-images {
+  position: sticky;
+  top: calc(var(--spacing-20) + 60px);
+  height: fit-content;
+}
+
+.van-detail-main-image {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: cover;
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Info Section */
+.van-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.van-detail-type-badge {
+  display: inline-block;
+  width: fit-content;
+  padding: var(--spacing-2) var(--spacing-5);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--white);
+  text-transform: capitalize;
+}
+
+.van-detail-title {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-black);
+  color: var(--gray-900);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.van-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-6);
+  padding: var(--spacing-4) 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-base);
+  color: var(--gray-600);
+}
+
+.meta-item svg {
+  color: var(--primary-600);
+  font-size: 1.25rem;
+}
+
+/* Price Section */
+.van-detail-price-section {
+  background: linear-gradient(135deg, var(--primary-50) 0%, var(--teal-50) 100%);
+  padding: var(--spacing-8);
+  border-radius: var(--radius-2xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-6);
+  flex-wrap: wrap;
+}
+
+.price-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.price-label {
+  font-size: var(--font-size-sm);
+  color: var(--gray-600);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.price-amount {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-1);
+}
+
+.currency {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-600);
+}
+
+.amount {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-black);
+  color: var(--gray-900);
+  line-height: 1;
+}
+
+.rent-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  white-space: nowrap;
+}
+
+/* Description */
+.van-detail-description h2,
+.van-detail-specs h2,
+.van-detail-features h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-4);
+}
+
+.van-detail-description p {
+  font-size: var(--font-size-lg);
+  line-height: 1.8;
+  color: var(--gray-700);
+  margin: 0;
+}
+
+/* Specs */
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-4);
+  background-color: var(--white);
+  padding: var(--spacing-6);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.spec-label {
+  font-size: var(--font-size-sm);
+  color: var(--gray-500);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.spec-value {
+  font-size: var(--font-size-lg);
+  color: var(--gray-900);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Features */
+.features-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-3);
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+  background-color: var(--gray-50);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  color: var(--gray-700);
+  transition: all var(--transition-base);
+}
+
+.feature-item:hover {
+  background-color: var(--primary-50);
+  transform: translateX(4px);
+}
+
+.feature-item svg {
+  color: var(--success);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .van-detail-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-8);
+  }
+
+  .van-detail-images {
+    position: static;
+  }
+
+  .features-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .van-detail-page {
+    padding: var(--spacing-6) 0 var(--spacing-10);
+  }
+
+  .van-detail-price-section {
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--spacing-6);
+  }
+
+  .rent-btn {
+    width: 100%;
+  }
+
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .van-detail-meta {
+    flex-direction: column;
+    gap: var(--spacing-3);
+  }
+}
