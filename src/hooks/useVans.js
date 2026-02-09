@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react'
-import { getAllVans, getVanById, getHostVans, searchVans } from '@/services/api'
+import { 
+  getAllVans, 
+  getVanById, 
+  getHostVans, 
+  searchVans 
+} from '@/services/api'
 
 /**
  * Hook to fetch all vans
@@ -10,40 +15,33 @@ export function useVans() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const fetchVans = async () => {
-      try {
-        setLoading(true)
-        setError(null)
-        const data = await getAllVans()
-        setVans(data)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-
     fetchVans()
   }, [])
 
-  const refetch = async () => {
+  const fetchVans = async () => {
     try {
       setLoading(true)
       setError(null)
       const data = await getAllVans()
-      setVans(data)
+      // Ensure each van has an id field
+      const vansWithIds = data.map(van => ({
+        ...van,
+        id: van.id // Firestore document ID
+      }))
+      setVans(vansWithIds)
     } catch (err) {
       setError(err.message)
+      console.error('Error fetching vans:', err)
     } finally {
       setLoading(false)
     }
   }
 
-  return { vans, loading, error, refetch }
+  return { vans, loading, error, refetch: fetchVans }
 }
 
 /**
- * Hook to fetch single van
+ * Hook to fetch single van by ID
  */
 export function useVan(id) {
   const [van, setVan] = useState(null)
@@ -53,23 +51,28 @@ export function useVan(id) {
   useEffect(() => {
     if (!id) return
 
-    const fetchVan = async () => {
-      try {
-        setLoading(true)
-        setError(null)
-        const data = await getVanById(id)
-        setVan(data)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-
     fetchVan()
   }, [id])
 
-  return { van, loading, error }
+  const fetchVan = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+      const data = await getVanById(id)
+      // Ensure van has id field
+      setVan({
+        ...data,
+        id: data.id || id
+      })
+    } catch (err) {
+      setError(err.message)
+      console.error('Error fetching van:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return { van, loading, error, refetch: fetchVan }
 }
 
 /**
@@ -83,63 +86,66 @@ export function useHostVans(hostId) {
   useEffect(() => {
     if (!hostId) return
 
-    const fetchHostVans = async () => {
-      try {
-        setLoading(true)
-        setError(null)
-        const data = await getHostVans(hostId)
-        setVans(data)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-
     fetchHostVans()
   }, [hostId])
 
-  return { vans, loading, error }
-}
-
-/**
- * Hook for searching vans
- */
-export function useVanSearch() {
-  const [results, setResults] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-
-  const search = async (searchTerm) => {
-    if (!searchTerm || searchTerm.trim() === '') {
-      setResults([])
-      return
-    }
-
+  const fetchHostVans = async () => {
     try {
       setLoading(true)
       setError(null)
-      const data = await searchVans(searchTerm)
-      setResults(data)
+      const data = await getHostVans(hostId)
+      // Ensure each van has an id field
+      const vansWithIds = data.map(van => ({
+        ...van,
+        id: van.id
+      }))
+      setVans(vansWithIds)
     } catch (err) {
       setError(err.message)
-      setResults([])
+      console.error('Error fetching host vans:', err)
     } finally {
       setLoading(false)
     }
   }
 
-  const clearSearch = () => {
-    setResults([])
-    setError(null)
-  }
-
-  return { results, loading, error, search, clearSearch }
+  return { vans, loading, error, refetch: fetchHostVans }
 }
 
-export default {
-  useVans,
-  useVan,
-  useHostVans,
-  useVanSearch
+/**
+ * Hook to search vans
+ */
+export function useVanSearch(searchTerm) {
+  const [vans, setVans] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    if (!searchTerm) {
+      setVans([])
+      return
+    }
+
+    searchForVans()
+  }, [searchTerm])
+
+  const searchForVans = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+      const data = await searchVans(searchTerm)
+      // Ensure each van has an id field
+      const vansWithIds = data.map(van => ({
+        ...van,
+        id: van.id
+      }))
+      setVans(vansWithIds)
+    } catch (err) {
+      setError(err.message)
+      console.error('Error searching vans:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return { vans, loading, error, refetch: searchForVans }
 }

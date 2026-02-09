@@ -1,10 +1,9 @@
-import { collection, addDoc, getDocs } from 'firebase/firestore'
-import { db } from '../config/firebase'  // ← Changed from './config/firebase'
-import { vansData, usersData } from '../data/seedData'  // ← Changed from './data/seedData'
+import { collection, doc, setDoc, getDocs } from 'firebase/firestore'
+import { db } from '../config/firebase'
+import { vansData, usersData } from '../data/seedData'
 
 /**
- * Seed Firebase with initial data
- * Run this once to populate the database
+ * Seed Firebase with initial data using custom document IDs
  */
 export async function seedDatabase() {
   console.log('🌱 Starting database seeding...')
@@ -17,19 +16,21 @@ export async function seedDatabase() {
       return
     }
 
-    // Seed vans
+    // Seed vans with custom IDs (van-001, van-002, etc.)
     console.log('📦 Seeding vans...')
-    const vansPromises = vansData.map(van =>
-      addDoc(collection(db, 'vans'), van)
-    )
+    const vansPromises = vansData.map((van, index) => {
+      const vanId = `van-${String(index + 1).padStart(3, '0')}` // van-001, van-002, etc.
+      return setDoc(doc(db, 'vans', vanId), van)
+    })
     await Promise.all(vansPromises)
     console.log(`✅ Added ${vansData.length} vans`)
 
-    // Seed users
+    // Seed users with custom IDs
     console.log('👥 Seeding users...')
-    const usersPromises = usersData.map(user =>
-      addDoc(collection(db, 'users'), user)
-    )
+    const usersPromises = usersData.map((user, index) => {
+      const userId = user.id || `user-${String(index + 1).padStart(3, '0')}`
+      return setDoc(doc(db, 'users', userId), user)
+    })
     await Promise.all(usersPromises)
     console.log(`✅ Added ${usersData.length} users`)
 
@@ -40,7 +41,7 @@ export async function seedDatabase() {
   }
 }
 
-// Uncomment to run seeding
-// seedDatabase()
+// Uncomment to run seeding - ONLY RUN ONCE
+ // seedDatabase()
 
 export default seedDatabase

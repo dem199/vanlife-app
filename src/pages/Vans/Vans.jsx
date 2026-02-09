@@ -8,6 +8,8 @@ import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner'
 import ErrorMessage from '@/components/ErrorMessage/ErrorMessage'
 import './Vans.css'
 
+
+
 export default function Vans() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [searchTerm, setSearchTerm] = useState('')
@@ -17,7 +19,7 @@ export default function Vans() {
 
   // Filter vans based on type and search
   const displayedVans = vans.filter(van => {
-    const matchesType = !typeFilter || van.type === typeFilter
+    const matchesType = !typeFilter || van.type?.toLowerCase() === typeFilter.toLowerCase()
     const matchesSearch = !searchTerm || 
       van.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       van.location?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -66,6 +68,11 @@ export default function Vans() {
           transition={{ duration: 0.5 }}
         >
           <h1 className="page-title">Explore our van options</h1>
+
+         
+
+
+
 
           {/* Search Bar */}
           <div className="search-container">

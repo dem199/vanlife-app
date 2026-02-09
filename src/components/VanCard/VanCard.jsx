@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { FiMapPin, FiStar, FiUsers } from 'react-icons/fi'
+import { FiMapPin, FiUsers, FiStar } from 'react-icons/fi'
 import './VanCard.css'
 
 export default function VanCard({ van, searchParams }) {
@@ -10,66 +10,75 @@ export default function VanCard({ van, searchParams }) {
     luxury: 'var(--gray-900)'
   }
 
+  // Build the correct link with search params
+  const vanLink = searchParams 
+    ? `/vans/${van.id}?${searchParams}` 
+    : `/vans/${van.id}`
+
   return (
-    <motion.div
+    <Link 
+      to={vanLink}
+      state={{ 
+        search: searchParams ? `?${searchParams}` : '',
+        type: searchParams?.get('type') || 'all'
+      }}
       className="van-card"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -5 }}
-      transition={{ duration: 0.3 }}
     >
-      <Link 
-        to={`/vans/${van.id}`}
-        state={{ 
-          search: searchParams ? `?${searchParams.toString()}` : '',
-          type: searchParams?.get('type') || 'all'
-        }}
-        className="van-card-link"
+      <motion.div
+        whileHover={{ y: -8 }}
+        transition={{ duration: 0.3 }}
       >
-        <div className="van-image-container">
+        <div className="van-card-image-container">
           <img 
             src={van.imageUrl} 
             alt={van.name}
-            className="van-image"
+            className="van-card-image"
             loading="lazy"
+            onError={(e) => {
+              e.target.src = 'https://images.unsplash.com/photo-1527786356703-4b100091cd2c?w=800&auto=format&fit=crop'
+            }}
           />
           <div 
-            className="van-type-badge"
+            className="van-card-type-badge"
             style={{ backgroundColor: typeColors[van.type] }}
           >
             {van.type}
           </div>
         </div>
 
-        <div className="van-card-body">
-          <div className="van-header">
-            <h3 className="van-name">{van.name}</h3>
-            <div className="van-price">
+        <div className="van-card-content">
+          <div className="van-card-header">
+            <h3 className="van-card-title">{van.name}</h3>
+            <div className="van-card-price">
               <span className="price-amount">${van.price}</span>
               <span className="price-period">/day</span>
             </div>
           </div>
 
-          <div className="van-meta">
-            <div className="van-meta-item">
+          <div className="van-card-meta">
+            <div className="meta-item">
               <FiMapPin />
               <span>{van.location}</span>
             </div>
-            <div className="van-meta-item">
+            <div className="meta-item">
               <FiUsers />
-              <span>Sleeps {van.capacity}</span>
+              <span>{van.capacity}</span>
             </div>
-            <div className="van-meta-item">
+            <div className="meta-item">
               <FiStar />
-              <span>{van.rating} ({van.reviews})</span>
+              <span>{van.rating}</span>
             </div>
           </div>
 
-          <p className="van-description">
-            {van.description.substring(0, 100)}...
-          </p>
+          {van.description && (
+            <p className="van-card-description">
+              {van.description.length > 100
+                ? van.description.substring(0, 100) + '...'
+                : van.description}
+            </p>
+          )}
         </div>
-      </Link>
-    </motion.div>
+      </motion.div>
+    </Link>
   )
 }
