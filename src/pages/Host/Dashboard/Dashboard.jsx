@@ -95,29 +95,29 @@ export default function Dashboard() {
           </Link>
         </div>
 
-        {vans.length > 0 ? (
-          <div className="vans-quick-list">
-            {vans.slice(0, 3).map((van) => (
-              <Link
-                key={van.id}
-                to={`vans/${van.id}`}
-                className="van-quick-card"
-              >
-                <img src={van.imageUrl} alt={van.name} />
-                <div className="van-quick-info">
-                  <h4>{van.name}</h4>
-                  <p>${van.price}/day</p>
-                </div>
-                <button className="view-btn">View</button>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="empty-state">
-            <p>You haven't listed any vans yet.</p>
-            <button className="btn btn-primary">Add your first van</button>
-          </div>
-        )}
+   {vans.length > 0 ? (
+  <div className="vans-quick-list">
+    {vans.slice(0, 3).map((van) => (
+      <Link
+        key={van.id}
+        to={`/vans/${van.id}`}  
+        className="van-quick-card"
+      >
+        <img src={van.imageUrl} alt={van.name} />
+        <div className="van-quick-info">
+          <h4>{van.name}</h4>
+          <p>${van.price}/day</p>
+        </div>
+        <button className="view-btn">View</button>
+      </Link>
+    ))}
+  </div>
+) : (
+  <div className="empty-state">
+    <p>You haven't listed any vans yet.</p>
+    <button className="btn btn-primary">Add your first van</button>
+  </div>
+)}
       </div>
 
       {/* Income Section */}

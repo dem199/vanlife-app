@@ -32,69 +32,76 @@ export default function Login() {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setFormError(null)
+  e.preventDefault()
+  setFormError(null)
 
-    if (!formData.email || !formData.password) {
-      setFormError('Please fill in all fields')
+  if (!formData.email || !formData.password) {
+    setFormError('Please fill in all fields')
+    return
+  }
+
+  setIsSubmitting(true)
+
+  try {
+    // Check demo credentials first
+    if (formData.email === 'demo@vanlife.com' && formData.password === 'password') {
+      const demoUser = {
+        id: 'host-123',
+        email: 'demo@vanlife.com',
+        name: 'Demo User'
+      }
+      login(demoUser, 'demo-token-' + Date.now())
+      toast.success('Welcome back!')
+      
+      // Redirect after login
+      setTimeout(() => {
+        navigate(from, { replace: true })
+      }, 100)
       return
     }
 
-    setIsSubmitting(true)
+    // Check Firestore for real users
+    const usersRef = collection(db, 'users')
+    const q = query(
+      usersRef,
+      where('email', '==', formData.email),
+      where('password', '==', formData.password)
+    )
+    const querySnapshot = await getDocs(q)
 
-    try {
-      // Check demo credentials first
-      if (formData.email === 'demo@vanlife.com' && formData.password === 'password') {
-        const demoUser = {
-          id: 'host-123',
-          email: 'demo@vanlife.com',
-          name: 'Demo User'
-        }
-        login(demoUser, 'demo-token-' + Date.now())
-        toast.success('Welcome back!')
-        navigate(from, { replace: true })
-        return
-      }
-
-      // Check Firestore for real users
-      const usersRef = collection(db, 'users')
-      const q = query(
-        usersRef,
-        where('email', '==', formData.email),
-        where('password', '==', formData.password)
-      )
-      const querySnapshot = await getDocs(q)
-
-      if (querySnapshot.empty) {
-        setFormError('Invalid email or password')
-        toast.error('Login failed')
-        setIsSubmitting(false)
-        return
-      }
-
-      // Get user data
-      const userDoc = querySnapshot.docs[0]
-      const userData = {
-        id: userDoc.id,
-        ...userDoc.data()
-      }
-
-      // Remove password from user object
-      delete userData.password
-
-      login(userData, 'user-token-' + Date.now())
-      toast.success(`Welcome back, ${userData.name}!`)
-      navigate(from, { replace: true })
-
-    } catch (error) {
-      console.error('Login error:', error)
-      setFormError('An error occurred. Please try again.')
+    if (querySnapshot.empty) {
+      setFormError('Invalid email or password')
       toast.error('Login failed')
-    } finally {
       setIsSubmitting(false)
+      return
     }
-  }
 
+    // Get user data
+    const userDoc = querySnapshot.docs[0]
+    const userData = {
+      id: userDoc.id,
+      ...userDoc.data()
+    }
+
+    // Remove password from user object
+    delete userData.password
+
+    login(userData, 'user-token-' + Date.now())
+    toast.success(`Welcome back, ${userData.name}!`)
+    
+    // Redirect after login
+    setTimeout(() => {
+      navigate(from, { replace: true })
+    }, 100)
+
+  } catch (error) {
+    console.error('Login error:', error)
+    setFormError('An error occurred. Please try again.')
+    toast.error('Login failed')
+  } finally {
+    setIsSubmitting(false)
+  }
+}
   return (
     <div className="login-page">
       <div className="login-container">

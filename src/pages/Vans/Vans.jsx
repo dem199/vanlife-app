@@ -69,8 +69,6 @@ export default function Vans() {
         >
           <h1 className="page-title">Explore our van options</h1>
 
-         
-
 
 
 

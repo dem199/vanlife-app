@@ -42,6 +42,6 @@ export async function seedDatabase() {
 }
 
 // Uncomment to run seeding - ONLY RUN ONCE
- // seedDatabase()
+   //seedDatabase()
 
 export default seedDatabase
