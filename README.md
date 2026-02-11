@@ -2,7 +2,7 @@
 
 A modern, full-featured van rental platform built with React, Firebase, and cutting-edge web technologies.
 
-![VanLife](https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?w=1200&auto=format&fit=crop)
+![VanCruise](https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?w=1200&auto=format&fit=crop)
 
 ## ✨ Features
 
@@ -38,8 +38,8 @@ A modern, full-featured van rental platform built with React, Firebase, and cutt
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/dem199/vanlife-app.git
-cd vanlife-app
+git clone https://github.com/dem199/vancruise.git
+cd vancruise
 ```
 
 2. **Install dependencies**

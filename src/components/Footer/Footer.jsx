@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="footer-container">
         <div className="footer-content">
           <div className="footer-section">
-            <h3 className="footer-title">#VANLIFE</h3>
+            <h3 className="footer-title">VANCRUISE</h3>
             <p className="footer-description">
               Your journey begins with the perfect van. Explore, adventure, and create memories on the open road.
             </p>
@@ -63,7 +63,7 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <p className="copyright">
-            © {currentYear} VanLife. All rights reserved.
+            © {currentYear} VanCruise. All rights reserved.
           </p>
           <p className="footer-tagline">
             Made with ❤️ for adventurers By Optimistic

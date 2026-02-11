@@ -94,7 +94,7 @@ export default function Signup() {
         >
           <div className="login-header">
             <h1>Create Account</h1>
-            <p>Join VanLife and start your adventure</p>
+            <p>Join VanCruise and start your adventure</p>
           </div>
 
           {formError && (
