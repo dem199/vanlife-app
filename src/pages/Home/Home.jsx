@@ -60,7 +60,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2>Why Choose VanLife?</h2>
+            <h2>Why Choose VanCruise?</h2>
             <p>Everything you need for an unforgettable journey</p>
           </motion.div>
 
